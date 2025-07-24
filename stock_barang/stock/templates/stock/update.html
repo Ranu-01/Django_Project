@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block contens %}
+<h3>{{ title }}</h3>
+<form method="post">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label class="form-label">Nama Barang</label>
+    <input name="nama_barang" type="text" class="form-control {% if data_form.nama_barang.errors %}is-invalid{% endif %}" value="{{ data_form.nama_barang.value|default_if_none:'' }}">
+    {% if data_form.nama_barang.errors %}
+      <div class="invalid-feedback">
+        {{ data_form.nama_barang.errors.0 }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Jumlah</label>
+    <input name="quantity" type="number" class="form-control {% if data_form.quantity.errors %}is-invalid{% endif %}" value="{{ data_form.quantity.value|default_if_none:'' }}">
+    {% if data_form.quantity.errors %}
+      <div class="invalid-feedback">
+        {{ data_form.quantity.errors.0 }}
+      </div>
+    {% endif %}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Tambah</button>
+</form>
+{% endblock contens %}

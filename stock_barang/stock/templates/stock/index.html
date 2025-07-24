@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+     {{ page_title }}
+{% endblock title %}
+
+{% block contens %}
+     <a class="btn btn-primary mt-5" href="{% url 'stock:create' %}" role="button">Tambah</a>
+
+     <table class="table mt-5" >
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nama Barang</th>
+      <th scope="col">Jumblah Barang</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for data in semua_data %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <th scope="row">{{ data.id }}</th>
+      <td>{{ data.nama_barang }}</td>
+      <td>{{ data.quantity }}</td>
+      <td>
+          <a class="btn btn-success" href="{% url 'stock:update' data.id %}" role="button">Edit</a>
+          <a class="btn btn-danger" href="{% url 'stock:delete' data.id %}" role="button" onclick="return confirm('Yakin ingin menghapus barang ini?')">Hapus</a>
+          <a class="btn btn-warning" href="{% url 'stock:detail' %}" role="button">Detail</a>
+          <a class="btn btn-primary" href="{% url 'stock:pembelian' data.id %}">Beli</a>
+          <a href="{% url 'stock:penjualan' data.id %}" class="btn btn-danger">Jual</a>
+
+
+      </td>
+    </tr>
+     {% endfor %}
+  </tbody>
+</table>
+{% endblock contens %}
+
+

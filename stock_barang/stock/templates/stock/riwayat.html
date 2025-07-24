@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block contens %}
+<div class="container mt-5">
+  <h2>{{ title }}</h2>
+
+  <table class="table table-bordered table-striped mt-4">
+    <thead class="table-dark">
+      <tr>
+        <th>Nama Barang</th>
+        <th>Jumlah</th>
+        <th>Tanggal</th>
+        <th>Jenis Transaksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in data_pembelian %}
+      <tr>
+        <td>{{ item.barang.nama_barang }}</td>
+        <td>{{ item.jumlah }}</td>
+        <td>{{ item.tanggal|date:"d M Y H:i" }}</td>
+        <td><span class="badge bg-success">Pembelian</span></td>
+      </tr>
+      {% endfor %}
+
+      {% for item in data_penjualan %}
+      <tr>
+        <td>{{ item.barang.nama_barang }}</td>
+        <td>{{ item.jumlah }}</td>
+        <td>{{ item.tanggal|date:"d M Y H:i" }}</td>
+        <td><span class="badge bg-danger">Penjualan</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'stock:index' %}" class="btn btn-secondary mt-3">Kembali</a>
+</div>
+{% endblock contens %}

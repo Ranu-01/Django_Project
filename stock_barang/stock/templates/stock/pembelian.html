@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block contens %}
+<h3>{{ title }}</h3>
+<p>Stok Tersedia: <strong>{{ barang.quantity }}</strong> | Stok Minimal: <strong>{{ barang.stok_minimal }}</strong></p>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger">
+      {{ form.non_field_errors.0 }}
+    </div>
+  {% endif %}
+
+  <div class="mb-3">
+  <label class="form-label">Jumlah Pembelian</label>
+  {{ form.jumlah }}
+  {% if form.jumlah.errors %}
+    <div class="text-danger">{{ form.jumlah.errors.0 }}</div>
+  {% endif %}
+</div>
+
+
+  <button type="submit" class="btn btn-success">Beli</button>
+  <a href="{% url 'stock:index' %}" class="btn btn-secondary">Kembali</a>
+</form>
+{% endblock contens %}

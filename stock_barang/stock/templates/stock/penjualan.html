@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block contens %}
+<div class="container mt-4">
+  <h2>{{ title }}</h2>
+  <p>Stok saat ini: <strong>{{ barang.quantity }}</strong></p>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Jumlah Penjualan</label>
+          {{ form.jumlah }}
+          {% if form.non_field_errors %}
+     <div class="alert alert-danger">
+          {{ form.non_field_errors.0 }}
+     </div>
+     {% endif %}
+    </div>
+    <button type="submit" class="btn btn-danger">Jual</button>
+    <a href="{% url 'stock:index' %}" class="btn btn-secondary">Kembali</a>
+  </form>
+</div>
+{% endblock contens %}
